@@ -10,10 +10,10 @@ export default function HeaderManagement() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [activeTab] = useState('logo');
+
 
   // Mock header data - replace with actual API calls
-  const [headerData, setHeaderData] = useState({
+  const [headerData] = useState({
     logo: {
       url: '/images/sumad-logo.png',
       width: 120,
@@ -38,7 +38,7 @@ export default function HeaderManagement() {
   });
 
   const [editForm, setEditForm] = useState(headerData);
-  const [previewMode] = useState(false);
+
 
   useEffect(() => {
     // Check authentication
