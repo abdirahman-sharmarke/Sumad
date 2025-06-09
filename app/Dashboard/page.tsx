@@ -21,15 +21,25 @@ export default function Dashboard() {
   const [hoveredRow, setHoveredRow] = useState<string | null>(null);
   const [showTrailer, setShowTrailer] = useState(false);
   const [isVideoMuted, setIsVideoMuted] = useState(true);
+  const [subscription, setSubscription] = useState<any>(null);
+  const [showMoreInfo, setShowMoreInfo] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Load subscription info
+  useEffect(() => {
+    const subData = localStorage.getItem('subscription');
+    if (subData) {
+      setSubscription(JSON.parse(subData));
+    }
+  }, []);
 
   // Mock video data - in real app, this would come from API
   const featuredVideo = {
     id: 1,
-    title: "Squid Game",
-    description: "Hundreds of cash-strapped players accept a strange invitation to compete in children's games. Inside, a tempting prize awaits with deadly high stakes. A survival thriller that became a global phenomenon.",
-    duration: "60m per episode",
-    rating: "TV-MA",
+    title: "Teskilat",
+    description: "An elite intelligence organization fights against terrorism and national threats to protect Turkey. Follow the dangerous missions and personal sacrifices of the agents who risk everything for their country in this gripping Turkish drama series.",
+    duration: "120m per episode",
+    rating: "TV-14",
     year: 2021
   };
 
@@ -255,7 +265,7 @@ export default function Dashboard() {
         <div className="absolute inset-0 w-full h-full">
           {/* Background Image */}
           <Image
-            src="https://image.tmdb.org/t/p/original/dDlEmu3EZ0Pgg93K2SVNLCjCSvE.jpg"
+            src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2370&q=80"
             alt="Featured Content"
             fill
             className={`object-cover object-center w-full h-full transition-opacity duration-1000 ${showTrailer ? 'opacity-0' : 'opacity-100'}`}
@@ -263,19 +273,19 @@ export default function Dashboard() {
             style={{ objectPosition: 'center center' }}
           />
           
-          {/* Squid Game Promotional Trailer */}
+          {/* Teskilat Drama Promotional Trailer */}
           <video
             ref={videoRef}
             className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${showTrailer ? 'opacity-100' : 'opacity-0'}`}
             muted
             loop
             playsInline
-            poster="https://image.tmdb.org/t/p/original/dDlEmu3EZ0Pgg93K2SVNLCjCSvE.jpg"
+            poster="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2370&q=80"
             crossOrigin="anonymous"
           >
-            <source src="https://vod-progressive.akamaized.net/exp=1704067200~acl=%2Fvimeo-prod-skyfire-std-us%2F01%2F3000%2F27%2F689800847%2F3089087818.mp4~hmac=0b5b6e3c8f7f3c2c8e1a4e5c7c9d8e9f2c3e4f5e6e7e8e9e0e1e2e3e4e5e6e7e/vimeo-prod-skyfire-std-us/01/3000/27/689800847/3089087818.mp4" type="video/mp4" />
-            <source src="https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4" type="video/mp4" />
-            <source src="https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4" />
+            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4" type="video/mp4" />
+            <source src="https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" type="video/mp4" />
+            <source src="https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" type="video/mp4" />
             <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
@@ -290,14 +300,16 @@ export default function Dashboard() {
               {featuredVideo.title}
             </h1>
             <div className="flex items-center gap-4 mb-6">
-              <span className="text-[#F56D22] font-semibold">NEW</span>
+              <span className="text-[#F56D22] font-semibold">DRAMA</span>
               <span className="text-white">{featuredVideo.year}</span>
               <span className="border border-gray-400 text-white px-2 py-1 text-sm">{featuredVideo.rating}</span>
               <span className="text-gray-300">{featuredVideo.duration}</span>
             </div>
-            <p className="text-lg md:text-xl text-gray-300 mb-8 leading-relaxed">
-              {featuredVideo.description}
-            </p>
+            {!showTrailer && (
+              <p className="text-lg md:text-xl text-gray-300 mb-8 leading-relaxed">
+                {featuredVideo.description}
+              </p>
+            )}
             
             <div className="flex flex-col sm:flex-row gap-4">
               <button 
@@ -309,7 +321,10 @@ export default function Dashboard() {
                 </svg>
                 {showTrailer ? 'Playing' : 'Play'}
               </button>
-              <button className="bg-gray-600 bg-opacity-70 text-white px-8 py-3 rounded font-semibold text-lg hover:bg-opacity-90 transition-colors duration-200 flex items-center justify-center gap-2">
+              <button 
+                onClick={() => setShowMoreInfo(true)}
+                className="bg-gray-600 bg-opacity-70 text-white px-8 py-3 rounded font-semibold text-lg hover:bg-opacity-90 transition-colors duration-200 flex items-center justify-center gap-2"
+              >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
@@ -355,6 +370,161 @@ export default function Dashboard() {
         {/* Footer */}
         <Footer />
 
+        {/* More Info Modal */}
+        {showMoreInfo && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center">
+            {/* Backdrop */}
+            <div 
+              className="absolute inset-0 bg-black bg-opacity-80"
+              onClick={() => setShowMoreInfo(false)}
+            ></div>
+            
+            {/* Modal Content */}
+            <div className="relative bg-gray-900 rounded-lg max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+              {/* Close Button */}
+              <button
+                onClick={() => setShowMoreInfo(false)}
+                className="absolute top-4 right-4 z-10 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 rounded-full transition-colors"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+
+              {/* Video Section */}
+              <div className="relative aspect-video">
+                <Image
+                  src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2370&q=80"
+                  alt="Teskilat"
+                  fill
+                  className="object-cover rounded-t-lg"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent"></div>
+                
+                {/* Play Button Overlay */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <button className="bg-white bg-opacity-20 hover:bg-opacity-30 text-white p-4 rounded-full transition-colors">
+                    <svg className="w-12 h-12" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              {/* Content Section */}
+              <div className="p-6">
+                {/* Title and Year */}
+                <div className="flex items-center gap-4 mb-4">
+                  <h2 className="text-3xl font-bold text-white">{featuredVideo.title}</h2>
+                  <span className="text-[#F56D22] font-semibold text-lg">DRAMA</span>
+                </div>
+
+                {/* Action Buttons */}
+                <div className="flex gap-3 mb-6">
+                  <button className="bg-white text-black px-6 py-2 rounded font-semibold flex items-center gap-2 hover:bg-gray-200 transition-colors">
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z"/>
+                    </svg>
+                    Play
+                  </button>
+                  <button className="bg-gray-600 bg-opacity-70 text-white p-2 rounded-full hover:bg-opacity-90 transition-colors">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                    </svg>
+                  </button>
+                  <button className="bg-gray-600 bg-opacity-70 text-white p-2 rounded-full hover:bg-opacity-90 transition-colors">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                    </svg>
+                  </button>
+                  <button className="bg-gray-600 bg-opacity-70 text-white p-2 rounded-full hover:bg-opacity-90 transition-colors ml-auto">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                    </svg>
+                  </button>
+                </div>
+
+                {/* Info Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {/* Left Column */}
+                  <div className="md:col-span-2">
+                    {/* Match & Rating */}
+                    <div className="flex items-center gap-4 mb-4">
+                      <span className="text-green-400 font-semibold">98% Match</span>
+                      <span className="border border-gray-400 text-white px-2 py-1 text-sm">{featuredVideo.rating}</span>
+                      <span className="text-gray-300">{featuredVideo.year}</span>
+                      <span className="border border-gray-400 text-white px-2 py-1 text-sm">HD</span>
+                      <span className="border border-gray-400 text-white px-2 py-1 text-sm">🔊</span>
+                    </div>
+
+                    {/* Watch Season */}
+                    <h3 className="text-white text-xl font-semibold mb-3">Watch Season 1 Now</h3>
+                    
+                    {/* Description */}
+                    <p className="text-gray-300 text-base leading-relaxed mb-4">
+                      {featuredVideo.description}
+                    </p>
+                  </div>
+
+                  {/* Right Column */}
+                  <div>
+                    {/* Cast */}
+                    <div className="mb-4">
+                      <span className="text-gray-400 text-sm">Cast: </span>
+                      <span className="text-white text-sm">Serdar Yeğin, Deniz Baysal, Çağlar Ertuğrul, </span>
+                      <span className="text-gray-400 text-sm">more</span>
+                    </div>
+
+                    {/* Genres */}
+                    <div className="mb-4">
+                      <span className="text-gray-400 text-sm">Genres: </span>
+                      <span className="text-white text-sm">TV Dramas, Turkish, TV Action & Adventure</span>
+                    </div>
+
+                    {/* This Show Is */}
+                    <div>
+                      <span className="text-gray-400 text-sm">This Show Is: </span>
+                      <span className="text-white text-sm">Intense</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Episodes Section */}
+                <div className="mt-8">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-white text-xl font-semibold">Episodes</h3>
+                    <select className="bg-gray-800 text-white px-3 py-1 rounded border border-gray-600">
+                      <option>Season 1</option>
+                      <option>Season 2</option>
+                      <option>Season 3</option>
+                    </select>
+                  </div>
+                  
+                  {/* Episode List */}
+                  <div className="space-y-3">
+                    {[1, 2, 3].map((ep) => (
+                      <div key={ep} className="flex gap-4 p-3 hover:bg-gray-800 rounded transition-colors">
+                        <div className="flex-shrink-0 w-16 h-16 bg-gray-700 rounded flex items-center justify-center">
+                          <span className="text-white font-bold">{ep}</span>
+                        </div>
+                        <div className="flex-1">
+                          <div className="flex justify-between items-start mb-1">
+                            <h4 className="text-white font-medium">Episode {ep}</h4>
+                            <span className="text-gray-400 text-sm">{featuredVideo.duration}</span>
+                          </div>
+                          <p className="text-gray-400 text-sm line-clamp-2">
+                            An intense mission begins as the team infiltrates a dangerous operation...
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Custom Scrollbar Styles */}
         <style jsx global>{`
           .scrollbar-hide {
@@ -363,6 +533,12 @@ export default function Dashboard() {
           }
           .scrollbar-hide::-webkit-scrollbar {
             display: none;
+          }
+          .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
           }
         `}</style>
       </div>

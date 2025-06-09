@@ -21,7 +21,16 @@ export default function Home() {
   const handleGetStarted = (e: React.FormEvent) => {
     e.preventDefault();
     if (email) {
-      setCurrentView('register');
+      // Store email for registration process
+      localStorage.setItem('registrationEmail', email);
+      // Check if user already has an account
+      const isSubscribed = localStorage.getItem('isSubscribed');
+      if (isSubscribed === 'true') {
+        setCurrentView('login');
+      } else {
+        // Redirect to subscription page
+        window.location.href = '/subscription';
+      }
     }
   };
 
