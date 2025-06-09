@@ -129,7 +129,7 @@ export default function HelpCenter() {
           <div className="bg-gray-900 rounded-lg p-8 text-center">
             <h2 className="text-2xl font-medium text-white mb-4">Need More Help?</h2>
             <p className="text-gray-300 mb-6">
-              Can't find what you're looking for? Our support team is here to help you 24/7.
+              Can&apos;t find what you&apos;re looking for? Our support team is here to help you 24/7.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button className="bg-[#F56D22] text-white px-8 py-3 rounded-lg font-medium hover:bg-[#E5611F] transition-colors">

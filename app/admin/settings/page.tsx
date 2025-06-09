@@ -31,14 +31,11 @@ export default function Settings() {
     { id: 'system', name: 'System', icon: '💻' }
   ];
 
-  const handleSettingChange = (key: string, value: any) => {
+  const handleSettingChange = (key: string, value: string | boolean | number) => {
     setSettings(prev => ({ ...prev, [key]: value }));
   };
 
-  const handleSaveSettings = () => {
-    // Save settings logic here
-    alert('Settings saved successfully!');
-  };
+
 
   return (
     <div className="h-screen bg-gray-100 flex overflow-hidden">

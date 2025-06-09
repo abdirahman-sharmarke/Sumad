@@ -109,13 +109,7 @@ export default function TVShowsManagement() {
     );
   };
 
-  const handleSelectAll = () => {
-    if (selectedShows.length === filteredShows.length) {
-      setSelectedShows([]);
-    } else {
-      setSelectedShows(filteredShows.map(show => show.id));
-    }
-  };
+
 
   return (
     <div className="h-screen bg-gray-100 flex overflow-hidden">

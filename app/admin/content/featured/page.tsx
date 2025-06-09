@@ -27,7 +27,7 @@ export default function FeaturedContentManagement() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedPlacement, setSelectedPlacement] = useState('all');
   const [selectedContent, setSelectedContent] = useState<string[]>([]);
-  const [showAddForm, setShowAddForm] = useState(false);
+
 
   // Mock featured content data
   const [featuredContent, setFeaturedContent] = useState<FeaturedContent[]>([
@@ -130,7 +130,7 @@ export default function FeaturedContentManagement() {
   ]);
 
   const placements = ['All', 'Hero', 'Carousel', 'Trending', 'New Releases'];
-  const priorities = ['High', 'Medium', 'Low'];
+
 
   const filteredContent = featuredContent.filter(content => {
     const matchesSearch = content.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -288,7 +288,6 @@ export default function FeaturedContentManagement() {
               </div>
               <div className="flex items-center space-x-3">
                 <button 
-                  onClick={() => setShowAddForm(true)}
                   className="bg-[#F56D22] text-white px-4 py-2 rounded-lg hover:bg-[#E55A1C] transition-colors"
                 >
                   Add Featured

@@ -324,7 +324,7 @@ export default function CategoriesManagement() {
                   <label className="block text-sm font-medium text-gray-700 mb-2">Type</label>
                   <select
                     value={newCategory.type}
-                    onChange={(e) => setNewCategory(prev => ({ ...prev, type: e.target.value as any }))}
+                    onChange={(e) => setNewCategory(prev => ({ ...prev, type: e.target.value as 'genre' | 'collection' | 'language' }))}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F56D22] focus:border-transparent"
                   >
                     <option value="genre">Genre</option>

@@ -115,13 +115,7 @@ export default function MoviesManagement() {
     );
   };
 
-  const handleSelectAll = () => {
-    if (selectedMovies.length === filteredMovies.length) {
-      setSelectedMovies([]);
-    } else {
-      setSelectedMovies(filteredMovies.map(movie => movie.id));
-    }
-  };
+
 
   const handleAddMovie = (e: React.FormEvent) => {
     e.preventDefault();

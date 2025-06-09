@@ -4,13 +4,13 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import AdminSidebar from '@/components/AdminSidebar';
 import AdminHeader from '@/components/AdminHeader';
-import Image from 'next/image';
+
 
 export default function HeaderManagement() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState('logo');
+  const [activeTab] = useState('logo');
 
   // Mock header data - replace with actual API calls
   const [headerData, setHeaderData] = useState({
@@ -38,7 +38,7 @@ export default function HeaderManagement() {
   });
 
   const [editForm, setEditForm] = useState(headerData);
-  const [previewMode, setPreviewMode] = useState(false);
+  const [previewMode] = useState(false);
 
   useEffect(() => {
     // Check authentication
@@ -50,13 +50,7 @@ export default function HeaderManagement() {
     setIsLoading(false);
   }, [router]);
 
-  const handleSave = () => {
-    setHeaderData(editForm);
-    setPreviewMode(false);
-    // Here you would typically send data to your API
-    console.log('Saving header data:', editForm);
-    alert('Header settings saved successfully!');
-  };
+
 
   const handleLogoUpload = () => {
     const input = document.createElement('input');

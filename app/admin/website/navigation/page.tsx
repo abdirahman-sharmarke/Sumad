@@ -90,7 +90,7 @@ export default function NavigationManagement() {
     }
   };
 
-  const updateItem = (id: string, field: keyof NavigationItem, value: any) => {
+  const updateItem = (id: string, field: keyof NavigationItem, value: string | number | boolean) => {
     setEditForm(editForm.map(item => 
       item.id === id ? { ...item, [field]: value } : item
     ));
@@ -127,7 +127,7 @@ export default function NavigationManagement() {
               <div className="flex items-center justify-between">
                 <div>
                   <h2 className="text-xl font-semibold text-gray-900">Navigation Management</h2>
-                  <p className="text-gray-600 mt-1">Manage your website's navigation menu items and their order</p>
+                  <p className="text-gray-600 mt-1">Manage your website&apos;s navigation menu items and their order</p>
                 </div>
                 <div className="flex space-x-3">
                   {!isEditing ? (
@@ -357,7 +357,7 @@ export default function NavigationManagement() {
                   <li>Keep navigation menu items to 7 or fewer for better usability</li>
                   <li>Use clear, descriptive names that users can easily understand</li>
                   <li>Order items by importance and user priority</li>
-                  <li>Test navigation on mobile devices to ensure it's responsive</li>
+                  <li>Test navigation on mobile devices to ensure it&apos;s responsive</li>
                   <li>Use consistent URL patterns (e.g., /category-name)</li>
                 </ul>
               </div>

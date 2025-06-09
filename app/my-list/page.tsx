@@ -137,7 +137,7 @@ export default function MyList() {
               <span className="text-white text-sm">Sort by:</span>
               <select
                 value={sortBy}
-                onChange={(e) => setSortBy(e.target.value as any)}
+                onChange={(e) => setSortBy(e.target.value as 'date-added' | 'title' | 'year' | 'rating')}
                 className="bg-gray-800 text-white border border-gray-600 rounded px-3 py-2 text-sm focus:outline-none focus:border-[#F56D22]"
               >
                 <option value="date-added">Date Added</option>

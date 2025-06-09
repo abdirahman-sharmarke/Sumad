@@ -10,7 +10,7 @@ interface AuthWrapperProps {
 
 export default function AuthWrapper({ children, requireAuth = true }: AuthWrapperProps) {
   const [isLoading, setIsLoading] = useState(true);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
   const router = useRouter();
 
   useEffect(() => {
@@ -27,7 +27,6 @@ export default function AuthWrapper({ children, requireAuth = true }: AuthWrappe
         return;
       }
       
-      setIsAuthenticated(true);
       setIsLoading(false);
     };
 

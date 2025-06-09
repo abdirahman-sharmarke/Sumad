@@ -6,7 +6,7 @@ import AdminHeader from '@/components/AdminHeader';
 
 export default function Analytics() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [timeRange, setTimeRange] = useState('7d');
+  const [timeRange] = useState('7d');
 
   const viewsData = [
     { period: 'Jan', views: 45000, users: 3200 },

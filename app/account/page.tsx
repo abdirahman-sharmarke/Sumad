@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Header from '@/components/header';
 
 export default function AccountSettings() {
-  const [accountData, setAccountData] = useState({
+  const [accountData] = useState({
     email: 'user@example.com',
     phone: '+1 (555) 123-4567',
     plan: 'Premium',

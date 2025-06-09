@@ -25,9 +25,7 @@ export default function Home() {
     }
   };
 
-  const handleSignUpClick = () => {
-    setCurrentView('register');
-  };
+
 
   if (currentView === 'login') {
     return <Login />;
@@ -162,7 +160,7 @@ export default function Home() {
                   </svg>
                 </div>
                 <h3 className="text-xl font-semibold mb-2">Premium content</h3>
-                <p className="text-gray-300">Enjoy exclusive shows, movies, and documentaries you won't find anywhere else.</p>
+                <p className="text-gray-300">Enjoy exclusive shows, movies, and documentaries you won&apos;t find anywhere else.</p>
               </div>
               
               <div className="text-white">
