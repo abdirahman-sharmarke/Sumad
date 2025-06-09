@@ -273,7 +273,7 @@ export default function SubscriptionPage() {
               Cancel anytime online. No commitments, no cancellation fees.
             </p>
             <p className="text-xs">
-              By clicking "Subscribe", you agree to our Terms of Use and Privacy Policy.
+              By clicking &quot;Subscribe&quot;, you agree to our Terms of Use and Privacy Policy.
             </p>
           </div>
         </div>

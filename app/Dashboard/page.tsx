@@ -21,17 +21,8 @@ export default function Dashboard() {
   const [hoveredRow, setHoveredRow] = useState<string | null>(null);
   const [showTrailer, setShowTrailer] = useState(false);
   const [isVideoMuted, setIsVideoMuted] = useState(true);
-  const [subscription, setSubscription] = useState<any>(null);
   const [showMoreInfo, setShowMoreInfo] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
-
-  // Load subscription info
-  useEffect(() => {
-    const subData = localStorage.getItem('subscription');
-    if (subData) {
-      setSubscription(JSON.parse(subData));
-    }
-  }, []);
 
   // Mock video data - in real app, this would come from API
   const featuredVideo = {

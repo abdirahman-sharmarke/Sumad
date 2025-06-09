@@ -209,7 +209,7 @@ export default function SubscriptionsAdmin() {
                 {['overview', 'subscribers', 'plans'].map((tab) => (
                   <button
                     key={tab}
-                    onClick={() => setActiveTab(tab as any)}
+                    onClick={() => setActiveTab(tab as 'overview' | 'subscribers' | 'plans')}
                     className={`py-2 px-1 border-b-2 font-medium text-sm ${
                       activeTab === tab
                         ? 'border-[#F56D22] text-[#F56D22]'
